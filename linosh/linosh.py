@@ -595,21 +595,11 @@ def imp_prompt(ident,token):
 def help_menu():
 ####Why did I space the help like this, cause something something, then lazy
     help_var = """
-get-rack-pass <uuid> or <ip> - get rack password 
-get-imp-token <username> - get impersonation token 
-get-ng-servers <ddi> - enumerate next gen servers
-get-user <ddi> - get admin user 
-prompt-imp <user id> - impersonation prompt, hella alpha
-get-token - refresh your token
-get-databases - enumerate database instances, hella beta 
-get-ip-info - get json from ipfinder about an ip, hella beta
+list-servers : lists your linode servers
+quit : exit the shell
+help : show commands and usage
 
-<ddi> - display servers, select a server, select a bastion, then it will ssh through the bastion to the server
-servers - show servers 
-tokens - show tokens
-mytoken - show your token 
-help - this menu 
-quit - quit """
+"""
     return(help_var)
 
 def bye():
