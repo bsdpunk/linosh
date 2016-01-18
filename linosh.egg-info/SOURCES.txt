@@ -1,5 +1,6 @@
 setup.py
 linosh/__init__.py
+linosh/lin_utility.py
 linosh/linosh.py
 linosh/servers_action.py
 linosh.egg-info/PKG-INFO

@@ -36,7 +36,7 @@ cd linosh
 sudo python setup.py install
 ```
 #Autocompletion
-Currently autocompletion works in cygwin and linux, MacOS X and FreeBSD use a different form of readline, and the autocompletion does not work. I hope to fix this in a future patch.
+Currently autocompletion works in cygwin and linux. MacOS X and FreeBSD use a different form of readline, and the autocompletion does not work. I hope to fix this in a future patch.
 
 # Use
 Before you can use linosh you need to generate an api key. The first time you run linosh you will be asked to supply this key.
@@ -55,6 +55,7 @@ Commands currently implimented:
 ```
 list-servers : lists your linode servers
 avail-datacenters : lists available datacenters
+avail-distributions : lists available linux distros
 quit : exit the shell
 help : show commands and usage
 ```

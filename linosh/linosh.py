@@ -26,7 +26,7 @@ import unicodedata
 #import images
 #import dbinstance
 import servers_action
-
+import lin_utility
 
 #version = pkg_resources.require("linosh")[0].version
 arg_count = 0
@@ -36,7 +36,7 @@ database_count = 0
 ddb_count = 0
 hist_toggle = 0
 prompt_r = 0
-COMMANDS = ['list-servers','avail-datacenters', 'help', 'quit']
+COMMANDS = ['list-servers','avail-datacenters', 'avail-distributions', 'help', 'quit']
 for arg in sys.argv:
     arg_count += 1
 
@@ -249,7 +249,11 @@ def cli():
             valid = 1
         if cli == "avail-datacenters":
             api_key = get_linode_key(config)
-            pprint(servers_action.avail_datacenters(api_key))
+            pprint(lin_utility.avail_datacenters(api_key))
+            valid = 1
+        if cli == "avail-distributions":
+            api_key = get_linode_key(config)
+            pprint(lin_utility.avail_distributions(api_key))
             valid = 1
         if cli == "tokens":
             pprint(tokens)
@@ -596,6 +600,7 @@ def help_menu():
     help_var = """
 list-servers : lists your linode servers
 avail-datacenters : lists available centers
+avail-distributions : lists available distribution centers
 quit : exit the shell
 help : show commands and usage
 
@@ -646,7 +651,6 @@ if arg_count == 2:
         print(racker_token)
         valid = 1
         bye() 
-
     if command == "list-servers":
         api_key = get_linode_key(config)
         pprint(servers_action.list_servers(api_key))
@@ -654,7 +658,12 @@ if arg_count == 2:
         bye()
     if command == "avail-datacenters":
         api_key = get_linode_key(config)
-        pprint(servers_action.avail_datacenters(api_key))
+        pprint(lin_utility.avail_datacenters(api_key))
+        valid = 1
+        bye()
+    if command == "avail-distributions":
+        api_key = get_linode_key(config)
+        pprint(lin_utility.avail_distributions(api_key))
         valid = 1
         bye()
  

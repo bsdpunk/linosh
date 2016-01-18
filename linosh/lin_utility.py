@@ -1,0 +1,30 @@
+import sys
+import requests
+import json
+from pprint import pprint
+
+def avail_datacenters(api_key):
+    headers = {'content-type': 'application/json'}
+    endpoint = "https://api.linode.com/?api_key=" + api_key + "&api_action=avail.datacenters"
+    r = requests.get(endpoint, headers=headers)
+    json_data = json.loads(r.text) 
+   
+    return(json_data)
+
+
+def avail_distributions(api_key):
+    headers = {'content-type': 'application/json'}
+    endpoint = "https://api.linode.com/?api_key=" + api_key + "&api_action=avail.distributions"
+    r = requests.get(endpoint, headers=headers)
+    json_data = json.loads(r.text) 
+   
+    return(json_data)
+
+#def avail_kernels(api_key, option):
+#    if(option)
+#    headers = {'content-type': 'application/json'}
+#    endpoint = "https://api.linode.com/?api_key=" + api_key + "&api_action=avail.kernels"
+#    r = requests.get(endpoint, headers=headers)
+#    json_data = json.loads(r.text) 
+   
+#    return(json_data)
