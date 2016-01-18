@@ -1,4 +1,4 @@
-#What does linosh try to accomplinosh?
+#What does linosh try to accomplish?
 
 There is already a linode shell, that is called linosh. linosh tries to do these things
 
