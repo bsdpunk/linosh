@@ -36,7 +36,7 @@ database_count = 0
 ddb_count = 0
 hist_toggle = 0
 prompt_r = 0
-COMMANDS = ['list-servers', 'help', 'quit']
+COMMANDS = ['list-servers','avail-datacenters', 'help', 'quit']
 for arg in sys.argv:
     arg_count += 1
 
@@ -244,13 +244,12 @@ def cli():
             pprint(databases)
             valid = 1
         if cli == "list-servers":
-                #new_token = get_imp_token(arguement, racker_token)
-                #temp_dict = {arguement:new_token}
-                #print(new_token)
-                #global tokens
-                #tokens.update(temp_dict)
             api_key = get_linode_key(config)
             pprint(servers_action.list_servers(api_key))
+            valid = 1
+        if cli == "avail-datacenters":
+            api_key = get_linode_key(config)
+            pprint(servers_action.avail_datacenters(api_key))
             valid = 1
         if cli == "tokens":
             pprint(tokens)
@@ -596,6 +595,7 @@ def help_menu():
 ####Why did I space the help like this, cause something something, then lazy
     help_var = """
 list-servers : lists your linode servers
+avail-datacenters : lists available centers
 quit : exit the shell
 help : show commands and usage
 
@@ -647,7 +647,17 @@ if arg_count == 2:
         valid = 1
         bye() 
 
-
+    if command == "list-servers":
+        api_key = get_linode_key(config)
+        pprint(servers_action.list_servers(api_key))
+        valid = 1
+        bye()
+    if command == "avail-datacenters":
+        api_key = get_linode_key(config)
+        pprint(servers_action.avail_datacenters(api_key))
+        valid = 1
+        bye()
+ 
 
 
 PROMPT = linosh_p + '> '

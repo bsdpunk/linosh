@@ -1,12 +1,12 @@
-#What does linosh try to accomplish?
+#What does linosh try to accomplinosh?
 
-There is already a linode shell, that is called lish. Lish tries to do these things
+There is already a linode shell, that is called linosh. linosh tries to do these things
 
 ```
-The Linode Shell (Lish) provides console access to all of your Linodes. It also allows you to perform actions like rebooting a Linode or switching to a different configuration profile without having to open the Linode Manager. Lish is also a good rescue tool. The console provides out-of-band access to your Linode, which means you can use Lish to access your Linode even when you are unable to connect directly via SSH. This is useful if firewall settings or a bad network configuration prevent you from accessing your Linode using SSH.
+The Linode Shell (linosh) provides console access to all of your Linodes. It also allows you to perform actions like rebooting a Linode or switching to a different configuration profile without having to open the Linode Manager. linosh is also a good rescue tool. The console provides out-of-band access to your Linode, which means you can use linosh to access your Linode even when you are unable to connect directly via SSH. This is useful if firewall settings or a bad network configuration prevent you from accessing your Linode using SSH.
 ```
 
-Lish is trying to be an api complete shell for linode. Anything you can do with the api you will be able to do with linosh. Lish provides a tab completion enviroment and easy to follow instructions for launching api calls. You can script with linosh, using the command you would use in linosh.
+linosh is trying to be an api complete shell for linode. Anything you can do with the api you will be able to do with linosh. linosh provides a tab completion enviroment and easy to follow instructions for launching api calls. You can script with linosh, using the command you would use in linosh.
 
 So:
 
@@ -35,20 +35,27 @@ git clone https://github.com/bsdpunk/linosh.git
 cd linosh
 sudo python setup.py install
 ```
+#Autocompletion
+Currently autocompletion works in cygwin and linux, MacOS X and FreeBSD use a different form of readline, and the autocompletion does not work. I hope to fix this in a future patch.
 
 # Use
 Before you can use linosh you need to generate an api key. The first time you run linosh you will be asked to supply this key.
 
-### Example:
+#Linosh History
+Linosh includes a history of supplied commands in ~/.linosh_history
+
+### Example of ~/.linosh:
 
 ```
 { "default":[{ "api-key":"yourApiKey" }] } 
 ```
 
-Commands:
+Commands currently implimented:
 
 ```
 list-servers : lists your linode servers
+avail-datacenters : lists available datacenters
 quit : exit the shell
 help : show commands and usage
 ```
+
