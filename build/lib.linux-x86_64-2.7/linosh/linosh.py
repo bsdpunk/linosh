@@ -36,7 +36,7 @@ database_count = 0
 ddb_count = 0
 hist_toggle = 0
 prompt_r = 0
-COMMANDS = ['list-servers','avail-datacenters', 'avail-distributions', 'help', 'quit']
+COMMANDS = ['list-servers','ip-list', 'avail-datacenters', 'avail-distributions', 'help', 'quit']
 for arg in sys.argv:
     arg_count += 1
 
@@ -169,8 +169,9 @@ def cli():
         cli = re.sub('  ',' ', cli.rstrip())
         if len(cli.split(' ')) ==2:
             command,arguement = cli.split()
-            if command == "in-cli-example-with-arg":
-                print(ssh_expect(arguement, api_key))
+            if command == "ip-list":
+                api_key = get_linode_key(config)
+                print(servers_action.ip_list(api_key,arguement))
                 valid = 1
 ##########################################################################################
 # This starts the single linosh commands
@@ -189,6 +190,10 @@ def cli():
             api_key = get_linode_key(config)
             pprint(lin_utility.avail_distributions(api_key))
             valid = 1
+        if cli == "ip-list":
+            api_key = get_linode_key(config)
+            pprint(servers_action.ip_list(api_key))
+            valid = 1 
         if cli == "quit" or cli == "exit":
             hfile.close()
             bye()
@@ -224,7 +229,10 @@ def cli():
 def help_menu():
 ####Why did I space the help like this, cause something something, then lazy
     help_var = """
+(required) <optional>
+
 list-servers : lists your linode servers
+ip-list <linode_id> <IPaddress> : return JSON information about ip address and server 
 avail-datacenters : lists available centers
 avail-distributions : lists available distribution centers
 quit : exit the shell
@@ -274,15 +282,20 @@ if arg_count == 2:
         pprint(lin_utility.avail_distributions(api_key))
         valid = 1
         bye()
+    if command == "ip-list":
+        api_key = get_linode_key(config)
+        pprint(servers_action.ip_list(api_key))
+        valid = 1
+        bye()
  
 
 
 PROMPT = linosh_p + '> '
 
 if no_auth == 1:
-    racker_token =0
+    api_key =0
 else:
-    racker_token = get_linode_key(config)
+    api_key = get_linode_key(config)
     #print("here")
 
 ####Again, shit way to do this, Here's hoping it's better in beta :)
@@ -290,11 +303,14 @@ else:
 if arg_count == 3:
     command = sys.argv[1]
     arguement = sys.argv[2]
-#    if command == "get-ip-info":
-#        if sanitize("get-ip-info", arguement):
+    if command == "ip-list":
+        print(servers_action.ip_list(api_key, arguement))
+        valid = 1
+        bye()
+#        if sanitize(, arguement):
 #            pprint(get_ip_info(arguement, racker_token))
 #        else:
-#            print("This does not appear to be a valid IP address: get-ip-info 10.0.0.1")
+#            print("Something")
 #        valid = 1
 #    if command == "get-rack-pass":
 #        if sanitize('get-rack-pass', arguement):

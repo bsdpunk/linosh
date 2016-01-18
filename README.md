@@ -53,7 +53,11 @@ Linosh includes a history of supplied commands in ~/.linosh_history
 Commands currently implimented:
 
 ```
+Types of arguements:
+(requried) <optional>
+
 list-servers : lists your linode servers
+ip-list <linodeID> <IPAddress> : ip and server information 
 avail-datacenters : lists available datacenters
 avail-distributions : lists available linux distros
 quit : exit the shell
