@@ -2,6 +2,7 @@ setup.py
 linosh/__init__.py
 linosh/lin_utility.py
 linosh/linosh.py
+linosh/node_balance.py
 linosh/servers_action.py
 linosh.egg-info/PKG-INFO
 linosh.egg-info/SOURCES.txt

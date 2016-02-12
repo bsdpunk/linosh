@@ -27,6 +27,7 @@ import unicodedata
 #import dbinstance
 import servers_action
 import lin_utility
+import node_balance
 
 #version = pkg_resources.require("linosh")[0].version
 arg_count = 0
@@ -36,7 +37,7 @@ database_count = 0
 ddb_count = 0
 hist_toggle = 0
 prompt_r = 0
-COMMANDS = ['list-servers','ip-list', 'avail-datacenters', 'avail-distributions', 'help', 'quit']
+COMMANDS = ['nodebal-config-list','nodebal-node-list','nodebal-list', 'list-servers','ip-list', 'avail-datacenters', 'avail-distributions', 'help', 'quit']
 for arg in sys.argv:
     arg_count += 1
 
@@ -121,11 +122,8 @@ def get_linode_key(config):
     password = config["default"][0]["api-key"]
 
     headers = {'content-type': 'application/json'}
-    #payload = {"auth":{"RAX-AUTH:domain":{"name":"Rackspace"},"passwordCredentials":{"username":username,"password":password}}}
-    #r = requests.post("https://identity-internal.api.rackspacecloud.com/v2.0/tokens", data=json.dumps(payload), headers=headers)
     #json_data = json.loads(r.text)
     try:
-        #racker_token = json_data["access"]["token"]["id"]
         #print(password)
         return(password)
     except KeyError:
@@ -173,6 +171,16 @@ def cli():
                 api_key = get_linode_key(config)
                 print(servers_action.ip_list(api_key,arguement))
                 valid = 1
+            if command == "nodebal-node-list":
+                api_key = get_linode_key(config)
+                print(node_balance.nodebal_node_list(api_key,arguement))
+                valid = 1
+            if command == "nodebal-config-list":
+                api_key = get_linode_key(config)
+                print(node_balance.nodebal_config_list(api_key,arguement))
+                valid = 1
+
+
 ##########################################################################################
 # This starts the single linosh commands
 #######################################################################################
@@ -190,6 +198,10 @@ def cli():
             api_key = get_linode_key(config)
             pprint(lin_utility.avail_distributions(api_key))
             valid = 1
+        if cli == "nodebal-list":
+            api_key = get_linode_key(config)
+            pprint(node_balance.nodebal_list(api_key))
+            valid = 1
         if cli == "ip-list":
             api_key = get_linode_key(config)
             pprint(servers_action.ip_list(api_key))
@@ -201,26 +213,6 @@ def cli():
             print(help_menu())
             valid = 1
 
-#    if len(cli.split(' ')) ==3:
-#        command,arg_one,arg_two = cli.split()
-#        print(arg_two)
-#        if cli.isdigit() or re.match("^https", arg_two):
-#            if no_auth == 1:
-#                racker_token =0
-#            else:
-#                racker_token = get_racker_token(config)
-#            if re.match("^https",cli):
-#                thesplit = cli.split('/')
-#                cli = thesplit[4]
-#                print(cli)
-                
-#            get_ng_servers(cli, racker_token)
-#            pprint(ddi_bast)
-#            ddb_choice = raw_input("Which Server > ")
-#            bastion = raw_input("Bastion> ")
-#            ssh_expect_bast_through(username, bastion, int(ddb_choice),racker_token)
-            
- 
 
         if valid == 0:
             print("Unrecoginized Command")
@@ -282,12 +274,17 @@ if arg_count == 2:
         pprint(lin_utility.avail_distributions(api_key))
         valid = 1
         bye()
+    if command == "nodebal-list":
+        api_key = get_linode_key(config)
+        pprint(node_balance.nodebal_list(api_key))
+        valid = 1
+        bye()
     if command == "ip-list":
         api_key = get_linode_key(config)
         pprint(servers_action.ip_list(api_key))
         valid = 1
         bye()
- 
+
 
 
 PROMPT = linosh_p + '> '
@@ -307,6 +304,17 @@ if arg_count == 3:
         print(servers_action.ip_list(api_key, arguement))
         valid = 1
         bye()
+    if command == "nodebal-node-list":
+        api_key = get_linode_key(config)
+        print(node_balance.nodebal_node_list(api_key, arguement))
+        valid = 1
+        bye()
+    if command == "nodebal-config-list":
+        api_key = get_linode_key(config)
+        print(node_balance.nodebal_config_list(api_key, arguement))
+        valid = 1
+        bye()
+ 
 #        if sanitize(, arguement):
 #            pprint(get_ip_info(arguement, racker_token))
 #        else:
