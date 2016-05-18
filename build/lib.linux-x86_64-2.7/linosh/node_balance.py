@@ -31,6 +31,16 @@ def nodebal_config_list(api_key, node_bal_id):
    
     return(json_data)
 
+def nodebal_create(api_key, dc_id):
+    headers = {'content-type': 'application/json'}
+    #print(config_id)    
+    endpoint = "https://api.linode.com/?api_key=" + api_key + "&api_action=nodebalancer.create&DatacenterId="+dc_id
+    #print(endpoint)
+    r = requests.get(endpoint, headers=headers)
+    json_data = json.loads(r.text) 
+   
+    return(json_data)
+
 
 #def avail_distributions(api_key):
 #    headers = {'content-type': 'application/json'}

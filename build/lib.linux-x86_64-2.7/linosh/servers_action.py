@@ -36,3 +36,19 @@ def ip_list(api_key, arguement=0):
         
         
     return(json_data)
+
+def linode_create(api_key, dc_id, plan_id, pay_term_id=0):
+    headers = {'content-type': 'application/json'}
+    endpoint = "https://api.linode.com/?api_key=" + api_key + "&api_action=linode.create&DatacenterID="+ dc_id +"&PlanID=" +plan_id
+    r = requests.get(endpoint, headers=headers)
+    json_data = json.loads(r.text) 
+   
+    return(json_data)
+
+def linode_shutdown(api_key, numeric_lin_id):
+    headers = {'content-type': 'application/json'}
+    endpoint = "https://api.linode.com/?api_key=" + api_key + "&api_action=linode.shutdown&LinodeID="+ numeric_lin_id
+    r = requests.get(endpoint, headers=headers)
+    json_data = json.loads(r.text) 
+   
+    return(json_data)

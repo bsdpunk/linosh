@@ -5,6 +5,8 @@ There is already a linode shell, that is called lish. And their is a command lin
 
 linosh is trying to be an api complete shell for linode. Anything you can do with the api you will be able to do with linosh. linosh provides a tab completion enviroment and easy to follow instructions for launching api calls, as well as a connection agent to linode. You can script with linosh, using the command you would use in linosh.
 
+The purpose is to more easily create scripts for things such as autoscaling and the like.
+
 So:
 
 ```
@@ -33,7 +35,8 @@ cd linosh
 sudo python setup.py install
 ```
 #Autocompletion
-Currently autocompletion works in cygwin and linux. MacOS X and FreeBSD use a different form of readline, and the autocompletion does not work. I hope to fix this in a future patch.
+
+Tab completion now works on all systems
 
 # Use
 Before you can use linosh you need to generate an api key. The first time you run linosh you will be asked to supply this key.
@@ -59,5 +62,8 @@ avail-datacenters : lists available datacenters
 avail-distributions : lists available linux distros
 quit : exit the shell
 help : show commands and usage
+nodebal-list : get list of lode balancers    
+nodebal-config-list (id): get lode balancer specifics using id from list
+nodebal-node-list (config id): get node list of a balancer
 ```
 
