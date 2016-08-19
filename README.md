@@ -1,3 +1,5 @@
+#LINOSH HAS BEEN ROLLED INTO MY OTHER PROJECT TRASH https://github.com/bsdpunk/trash
+
 #What does linosh try to accomplish?
 
 There is already a linode shell, that is called lish. And their is a command line tool called the linode-cli. Linosh is a tool that aims to be very similiar to linode-cli and lish, but isn't complete yet.
@@ -66,4 +68,5 @@ nodebal-list : get list of lode balancers
 nodebal-config-list (id): get lode balancer specifics using id from list
 nodebal-node-list (config id): get node list of a balancer
 ```
+
 
